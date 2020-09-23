@@ -7,7 +7,6 @@ import { Turn } from "../types";
 export default () => {
     const dispatch = useDispatch();
     const history = useHistory();
-    let { path } = useRouteMatch();
 
     const handleOnDeleteTurn = (turnId: number) => () => {
         dispatch(deleteTurn(turnId))
@@ -35,7 +34,7 @@ export default () => {
     }
 
     const handleEditTurn = (turn: Turn) => () => {
-        console.log('handleEditTurn: ', turn)
+        dispatch(setTurnState({ ...turn }))
         history.push(`/turns/${turn.movie.movieId}`)
     }
 

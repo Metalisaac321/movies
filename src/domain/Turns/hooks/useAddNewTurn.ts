@@ -10,20 +10,23 @@ export default () => {
     const dispatch = useDispatch();
     const history = useHistory();
     const {
-        movieId,
-    } = useParams<{ movieId: string }>();
+        turnId,
+    } = useParams<{ turnId: string }>();
 
     const handleChangeTurnData = (key: string, value: any) => {
         dispatch(editTurnField(key, value));
     }
 
     const handleSave = () => {
-        if (movieId) {
-            dispatch(changeTurnById(Number(movieId)));
+        console.log('movieId: ', turnId);
+        if (turnId !== 'add-new-turn') {
+            console.log('se va a editar: ')
+            dispatch(changeTurnById(Number(turnId)));
         } else {
             const newTurn = { ...turn };
             dispatch(addNewTurn(newTurn))
         }
+        history.goBack()
         dispatch(setTurnState(
             {
                 turnId: 0,
@@ -37,7 +40,6 @@ export default () => {
                 }
             }
         ))
-        history.goBack()
     }
 
     return {
