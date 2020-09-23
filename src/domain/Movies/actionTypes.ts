@@ -1,10 +1,16 @@
-import { AddMovieDto, Movie } from "./types";
+import { AddMovieDto, Movie, DialogProps } from "./types";
 
 export const MOVIES_FETCH_INIT = 'MOVIES_FETCH_INIT';
 export const ADD_NEW_MOVIE = 'ADD_NEW_MOVIE';
 export const EDIT_MOVIE = 'EDIT_MOVIE';
 export const ASSIGN_TURN_MOVIE = 'ASSIGN_TURN_MOVIE';
 export const DELETE_MOVIE = 'DELETE_MOVIE';
+export const SET_DIALOG_STATE = 'SET_DIALOG_STATE';
+
+export interface SetDialogStateAction {
+  type: typeof SET_DIALOG_STATE;
+  dialogProps: DialogProps
+}
 
 interface MoviesFetchInitAction {
   type: typeof MOVIES_FETCH_INIT;
@@ -18,7 +24,8 @@ export interface AddNewMovieAction {
 
 interface EditMovieAction {
   type: typeof EDIT_MOVIE;
-  movie: Movie;
+  key: string;
+  value: any;
 }
 
 export interface AssignTurnMovieAction {
@@ -37,3 +44,4 @@ export type MoviesAction =
   | EditMovieAction
   | AssignTurnMovieAction
   | DeleteMovieAction
+  | SetDialogStateAction

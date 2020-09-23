@@ -9,8 +9,12 @@ import DeleteIcon from '@material-ui/icons/Delete'
 import { Movie, MoviesTableBodyProps } from './types';
 import useMoviesTable from './hooks/useMoviesTable';
 import useMovieTableRow from './hooks/useMovieTableRow';
+import useMovies from './hooks/useMovies';
+import MoviesDialog from './MoviesDialog';
+
 
 export default () => {
+    const { handleNewMovie } = useMovies();
     return (
         <Grid container direction="column" spacing={4} >
             <Grid container item direction="row" justify="space-between">
@@ -20,7 +24,7 @@ export default () => {
                     </Typography>
                 </Grid>
                 <ButtonContainer item>
-                    <StyledButton variant="contained" color="primary">
+                    <StyledButton variant="contained" color="primary" onClick={handleNewMovie}>
                         <Typography variant="body1">
                             Nueva película
                         </Typography>
@@ -28,6 +32,7 @@ export default () => {
                 </ButtonContainer>
             </Grid>
             <MoviesTable />
+            <MoviesDialog />
         </Grid>
     )
 }

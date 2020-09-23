@@ -8,7 +8,6 @@ export default () => {
         dispatch(deleteMovie(movieId))
     }
 
-
     return {
         handleOnDeleteMovie,
     }

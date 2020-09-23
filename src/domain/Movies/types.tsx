@@ -1,3 +1,4 @@
+
 export interface Movie {
     /** id of movie */
     movieId: number;
@@ -27,6 +28,19 @@ export interface MoviesTableBodyProps {
     movies: Movie[];
 }
 
+export interface DialogProps {
+    isOpen: boolean;
+    isEditMovie?: boolean;
+    movie: AddMovieDto;
+}
+
+export interface InitDialogProps {
+    isOpen: boolean;
+    isEditMovie: boolean;
+    movie: AddMovieDto;
+}
+
 export interface MoviesState {
     movies: Movie[];
+    dialogProps: DialogProps;
 }
