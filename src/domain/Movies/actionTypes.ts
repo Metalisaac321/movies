@@ -18,7 +18,7 @@ export interface SetDialogStateAction {
   dialogProps: DialogProps
 }
 
-interface MoviesFetchInitAction {
+export interface MoviesFetchInitAction {
   type: typeof MOVIES_FETCH_INIT;
   movies: Movie[];
 }
@@ -28,7 +28,7 @@ export interface AddNewMovieAction {
   movie: AddMovieDto;
 }
 
-interface EditMovieAction {
+export interface EditMovieAction {
   type: typeof EDIT_MOVIE;
   key: string;
   value: any;
