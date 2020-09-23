@@ -1,4 +1,4 @@
-import { ADD_NEW_MOVIE, DELETE_MOVIE, EDIT_MOVIE, MoviesAction, MOVIES_FETCH_INIT, SET_DIALOG_STATE } from "./actionTypes";
+import { ADD_NEW_MOVIE, CHANGE_MOVIE, DELETE_MOVIE, EDIT_MOVIE, MoviesAction, MOVIES_FETCH_INIT, SET_DIALOG_STATE } from "./actionTypes";
 import { DialogProps, Movie, AddMovieDto } from "./types";
 
 export const setInitMovies = (movies: Movie[]): MoviesAction => ({
@@ -25,4 +25,9 @@ export const editMovieField = (key: string, value: any): MoviesAction => ({
 export const addNewMovie = (newMovie: AddMovieDto): MoviesAction => ({
   type: ADD_NEW_MOVIE,
   movie: newMovie
+})
+
+export const changeMovieById = (movieId: number) => ({
+  type: CHANGE_MOVIE,
+  movieId,
 })

@@ -6,6 +6,12 @@ export const EDIT_MOVIE = 'EDIT_MOVIE';
 export const ASSIGN_TURN_MOVIE = 'ASSIGN_TURN_MOVIE';
 export const DELETE_MOVIE = 'DELETE_MOVIE';
 export const SET_DIALOG_STATE = 'SET_DIALOG_STATE';
+export const CHANGE_MOVIE = 'CHANGE_MOVIE';
+
+export interface ChangeMovieAction {
+  type: typeof CHANGE_MOVIE;
+  movieId: number;
+}
 
 export interface SetDialogStateAction {
   type: typeof SET_DIALOG_STATE;
@@ -45,3 +51,4 @@ export type MoviesAction =
   | AssignTurnMovieAction
   | DeleteMovieAction
   | SetDialogStateAction
+  | ChangeMovieAction

@@ -3,7 +3,7 @@ import { Button, Dialog, DialogActions, DialogTitle, FormControl, Grid, IconButt
 import React from 'react';
 import useMoviesDialog from '../hooks/useMoviesDialog';
 import CloseIcon from '@material-ui/icons/Close'
-import { StyledDialogContent } from './style';
+import { StyledDialogContent, StyledInputContainer } from './style';
 import DateFnsUtils from '@date-io/date-fns';
 import {
     KeyboardDatePicker, MuiPickersUtilsProvider,
@@ -38,14 +38,14 @@ export default () => {
                                 Nombre de la Película
                             </Typography>
                         </Grid>
-                        <Grid item>
+                        <StyledInputContainer item>
                             <TextField
                                 value={movie.name}
                                 fullWidth
                                 variant="outlined"
                                 onChange={(e) => handleChangeMovieData('name', e.target.value)}
                             />
-                        </Grid>
+                        </StyledInputContainer>
                     </Grid>
                     <Grid item container direction="row" spacing={4}>
                         <Grid item>
@@ -53,9 +53,10 @@ export default () => {
                                 Fecha de Publicación
                             </Typography>
                         </Grid>
-                        <Grid item>
+                        <StyledInputContainer item>
                             <MuiPickersUtilsProvider utils={DateFnsUtils}>
                                 <KeyboardDatePicker
+                                    fullWidth
                                     disableToolbar
                                     variant="inline"
                                     format="dd/MM/yyyy"
@@ -69,7 +70,7 @@ export default () => {
                                     }}
                                 />
                             </MuiPickersUtilsProvider>
-                        </Grid>
+                        </StyledInputContainer>
                     </Grid>
 
                     <Grid item container direction="row" spacing={4}>
@@ -78,7 +79,7 @@ export default () => {
                                 Estado
                             </Typography>
                         </Grid>
-                        <Grid>
+                        <StyledInputContainer>
                             <FormControl variant="outlined">
                                 <Select
                                     value={movie.state + ''}
@@ -88,7 +89,7 @@ export default () => {
                                     <MenuItem value={'false'}>Inactivo</MenuItem>
                                 </Select>
                             </FormControl>
-                        </Grid>
+                        </StyledInputContainer>
                     </Grid>
                 </Grid>
             </StyledDialogContent>

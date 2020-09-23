@@ -70,8 +70,14 @@ const MoviesTableBody = ({ movies }: MoviesTableBodyProps) => (
     </TableBody>
 )
 
-const MovieTableRow = ({ movieId, name, publicationDate, state }: Movie) => {
-    const movieTableRowProp = useMovieTableRow();
+const MovieTableRow = (movie: Movie) => {
+    const { movieId, name, publicationDate, state } = movie;
+    const {
+        handleEditMovie,
+        handleOnDeleteMovie,
+        handleChangeStatus
+    } = useMovieTableRow();
+
     return (
         <TableRow>
             <TableCell component="th" scope="row">
@@ -82,16 +88,16 @@ const MovieTableRow = ({ movieId, name, publicationDate, state }: Movie) => {
             <TableCell>{state ? 'Activo' : 'Inactivo'}</TableCell>
             <TableCell>
                 <Grid container direction="row" spacing={1}>
-                    <IconButton color="primary">
+                    <IconButton color="primary" onClick={handleEditMovie(movie)}>
                         <CreateIcon />
                     </IconButton>
                     <IconButton color="inherit">
                         <DehazeIcon />
                     </IconButton>
-                    <IconButton color="default">
+                    <IconButton color="default" onClick={handleChangeStatus(movie, !state)}>
                         {state ? <LockIcon /> : <LockOpenIcon />}
                     </IconButton>
-                    <IconButton color="secondary" onClick={movieTableRowProp.handleOnDeleteMovie(movieId)}>
+                    <IconButton color="secondary" onClick={handleOnDeleteMovie(movieId)}>
                         <DeleteIcon />
                     </IconButton>
                 </Grid>

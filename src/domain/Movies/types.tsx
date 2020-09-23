@@ -31,7 +31,7 @@ export interface MoviesTableBodyProps {
 export interface DialogProps {
     isOpen: boolean;
     isEditMovie?: boolean;
-    movie: AddMovieDto;
+    movie: Movie;
 }
 
 export interface InitDialogProps {

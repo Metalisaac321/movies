@@ -9,6 +9,7 @@ export default () => {
             isEditMovie: false,
             isOpen: true,
             movie: {
+                movieId: 0,
                 name: '',
                 publicationDate: new Date(),
                 state: true,
