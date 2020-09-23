@@ -15,7 +15,11 @@ export default () => {
     let turns = turnsState.turns;
 
     useEffect(() => {
-        dispatch(setInitTurns(TURNS))
+        const turn = turnsState.turn;
+        if (turns.length === 0) {
+            dispatch(setInitTurns(TURNS))
+        }
+
     }, [])
 
     useEffect(() => {
