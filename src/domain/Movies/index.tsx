@@ -6,6 +6,8 @@ import DehazeIcon from '@material-ui/icons/Dehaze'
 import LockIcon from '@material-ui/icons/Lock'
 import LockOpenIcon from '@material-ui/icons/LockOpen'
 import DeleteIcon from '@material-ui/icons/Delete'
+import { MOVIES } from './constants';
+import { Movie, MoviesTableBodyProps, MoviesTableRowProps } from './types';
 
 export default () => {
     return (
@@ -24,12 +26,12 @@ export default () => {
                     </StyledButton>
                 </ButtonContainer>
             </Grid>
-            <TableOfMovies />
+            <MoviesTable />
         </Grid>
     )
 }
 
-const TableOfMovies = () => {
+const MoviesTable = () => {
     return (
         <Grid item>
             <TableContainer>
@@ -37,46 +39,52 @@ const TableOfMovies = () => {
                     <TableHead>
                         <TableRow>
                             <TableCell>id</TableCell>
-                            <TableCell align="right">Nombre</TableCell>
-                            <TableCell align="right">F.Publicación</TableCell>
-                            <TableCell align="right">Estado</TableCell>
-                            <TableCell align="right"></TableCell>
+                            <TableCell>Nombre</TableCell>
+                            <TableCell>F.Publicación</TableCell>
+                            <TableCell>Estado</TableCell>
+                            <TableCell></TableCell>
                         </TableRow>
                     </TableHead>
-                    <TableBody>
-                        <TableRow>
-                            <TableCell component="th" scope="row">
-                                {'row.name'}
-                            </TableCell>
-                            <TableCell align="right">{'row.calories'}</TableCell>
-                            <TableCell align="right">{'row.fat'}</TableCell>
-                            <TableCell align="right">{'row.carbs'}</TableCell>
-                            <MovieOperations />
-                        </TableRow>
-                    </TableBody>
+                    <MoviesTableBody movies={MOVIES} />
                 </Table>
             </TableContainer>
         </Grid>
     )
 }
 
-const MovieOperations = () => {
-    return (
-        <TableCell align="right">
-            <Grid direction="row" spacing={1}>
+const MoviesTableBody = ({ movies }: MoviesTableBodyProps) => (
+    <TableBody>
+        {
+            movies.map((movie) => (
+                <MovieTableRow key={movie.movieId} {...movie} />
+            ))
+        }
+    </TableBody>
+)
+
+const MovieTableRow = ({ movieId, name, publicationDate, state }: Movie) => (
+    <TableRow>
+        <TableCell component="th" scope="row">
+            {movieId}
+        </TableCell>
+        <TableCell>{name}</TableCell>
+        <TableCell>{publicationDate.toISOString()}</TableCell>
+        <TableCell>{state ? 'Activo' : 'Inactivo'}</TableCell>
+        <TableCell>
+            <Grid container direction="row" spacing={1}>
                 <IconButton color="primary">
                     <CreateIcon />
                 </IconButton>
                 <IconButton color="inherit">
                     <DehazeIcon />
                 </IconButton>
-                <IconButton>
-                    <LockIcon />
+                <IconButton color="default">
+                    {state ? <LockIcon /> : <LockOpenIcon />}
                 </IconButton>
                 <IconButton color="secondary">
                     <DeleteIcon />
                 </IconButton>
             </Grid>
         </TableCell>
-    )
-}
+    </TableRow>
+)

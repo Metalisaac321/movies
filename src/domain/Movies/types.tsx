@@ -11,3 +11,11 @@ export interface Movie {
     /** state of movie (active or inactive) */
     state: boolean;
 }
+
+export interface MoviesTableBodyProps {
+    movies: Movie[];
+}
+
+export interface MoviesTableRowProps {
+
+}
