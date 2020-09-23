@@ -1,3 +1,4 @@
+import { TurnedIn } from "@material-ui/icons";
 import { AddTurnDto, Turn } from "./types";
 
 export const TURNS_FETCH_INIT = 'TURNS_FETCH_INIT';
@@ -7,6 +8,7 @@ export const ASSIGN_TURN_TURN = 'ASSIGN_TURN_TURN';
 export const DELETE_TURN = 'DELETE_TURN';
 export const SET_DIALOG_STATE = 'SET_DIALOG_STATE';
 export const CHANGE_TURN = 'CHANGE_TURN';
+export const SET_TURN_STATE = 'SET_STATE_TURN'
 
 export interface ChangeTurnAction {
   type: typeof CHANGE_TURN;
@@ -20,7 +22,11 @@ export interface TurnsFetchInitAction {
 
 export interface AddNewTurnAction {
   type: typeof ADD_NEW_TURN;
-  turn: AddTurnDto;
+  turn: Turn;
+}
+export interface SetStateTurnAction {
+  type: typeof SET_TURN_STATE;
+  turn: Turn;
 }
 
 export interface EditTurnAction {
@@ -46,3 +52,4 @@ export type TurnsAction =
   | AssignTurnTurnAction
   | DeleteTurnAction
   | ChangeTurnAction
+  | SetStateTurnAction

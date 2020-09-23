@@ -1,3 +1,4 @@
+import { Movie } from "../Movies/types";
 
 export interface Turn {
     /** id of Turn */
@@ -9,9 +10,9 @@ export interface Turn {
     /** state of movie (active or inactive) */
     state: boolean;
 
-    /** ForeingKey with movie */
-    movieId: number;
+    movie: Movie;
 }
+
 
 export interface AddTurnDto {
     /** Turn hour */
@@ -30,4 +31,5 @@ export interface TurnsTableBodyProps {
 
 export interface TurnsState {
     turns: Turn[];
+    turn: Turn;
 }

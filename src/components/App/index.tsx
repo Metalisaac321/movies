@@ -8,7 +8,7 @@ import Turns from '../../domain/Turns';
 import Admin from '../../domain/Admin';
 import Profile from '../../domain/Profile';
 import Dashboard from '../../domain/Dashboard';
-import { ContainerAppGrid, SidebarAndContainerAppContainer, StyledAppBar, StyledDivider, StyledList } from './style';
+import { ContainerAppGrid, SidebarAndContainerAppContainer, SidebarContainer, StyledAppBar, StyledDivider, StyledList } from './style';
 import { MENU_ITEMS } from './constants';
 import { MenuItemProps } from './types';
 
@@ -41,7 +41,7 @@ const Topbar = () => {
 
 const Sidebar = () => {
   return (
-    <Grid item xs={12} sm={4}>
+    <SidebarContainer item xs={12} sm={4}>
       <StyledList>
         {
           MENU_ITEMS.map(({ menuItemId, ...menuItem }) => (
@@ -49,7 +49,7 @@ const Sidebar = () => {
           ))
         }
       </StyledList>
-    </Grid>
+    </SidebarContainer>
   )
 }
 

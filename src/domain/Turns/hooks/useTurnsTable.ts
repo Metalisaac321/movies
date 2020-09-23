@@ -3,16 +3,28 @@ import { TURNS } from "../constants";
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../../store'
 import { setInitTurns } from '../actionCreators'
+import { useParams } from "react-router-dom";
 
 export default () => {
+    const {
+        movieId,
+    } = useParams<{ movieId: string }>();
     const turnsState = useSelector((state: RootState) => state.turnsState);
     const dispatch = useDispatch();
 
+    let turns = turnsState.turns;
+
     useEffect(() => {
         dispatch(setInitTurns(TURNS))
-    }, [dispatch])
+    }, [])
+
+    useEffect(() => {
+        if (movieId) {
+            dispatch(setInitTurns(turns.filter((turn) => turn.movie.movieId.toString() === movieId)))
+        }
+    }, [movieId])
 
     return {
-        turns: turnsState.turns
+        turns,
     }
 }

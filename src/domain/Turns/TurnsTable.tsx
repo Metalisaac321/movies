@@ -11,7 +11,7 @@ import useTurnTableRow from './hooks/useTurnTableRow';
 import useTurns from './hooks/useTurns';
 import { Turn, TurnsTableBodyProps } from './types';
 
-export default () => {
+export default (props: {}) => {
     const {
         handleNewTurn,
     } = useTurns();
@@ -75,14 +75,13 @@ const TurnTableRow = (turnObject: Turn) => {
         turnId,
         state,
         turn,
-        movieId
+        movie
     } = turnObject;
 
     const {
         handleEditTurn,
         handleOnDeleteTurn,
         handleChangeStatus,
-        handleAssingTurns,
     } = useTurnTableRow();
 
     return (
@@ -92,14 +91,11 @@ const TurnTableRow = (turnObject: Turn) => {
             </TableCell>
             <TableCell>{turn}</TableCell>
             <TableCell>{state ? 'Activo' : 'Inactivo'}</TableCell>
-            <TableCell>{movieId}</TableCell>
+            <TableCell>{movie.name}</TableCell>
             <TableCell>
                 <Grid container direction="row" spacing={1}>
                     <IconButton color="primary" onClick={handleEditTurn(turnObject)}>
                         <CreateIcon />
-                    </IconButton>
-                    <IconButton color="inherit" onClick={handleAssingTurns(turnId)}>
-                        <DehazeIcon />
                     </IconButton>
                     <IconButton color="default" onClick={handleChangeStatus(turnObject, !state)}>
                         {state ? <LockIcon /> : <LockOpenIcon />}
