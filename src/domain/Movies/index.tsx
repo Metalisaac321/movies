@@ -6,8 +6,9 @@ import DehazeIcon from '@material-ui/icons/Dehaze'
 import LockIcon from '@material-ui/icons/Lock'
 import LockOpenIcon from '@material-ui/icons/LockOpen'
 import DeleteIcon from '@material-ui/icons/Delete'
-import { MOVIES } from './constants';
-import { Movie, MoviesTableBodyProps, MoviesTableRowProps } from './types';
+import { Movie, MoviesTableBodyProps } from './types';
+import useMoviesTable from './hooks/useMoviesTable';
+import useMovieTableRow from './hooks/useMovieTableRow';
 
 export default () => {
     return (
@@ -18,11 +19,11 @@ export default () => {
                         Películas
                     </Typography>
                 </Grid>
-                <ButtonContainer item alignContent="center">
+                <ButtonContainer item>
                     <StyledButton variant="contained" color="primary">
                         <Typography variant="body1">
                             Nueva película
-                    </Typography>
+                        </Typography>
                     </StyledButton>
                 </ButtonContainer>
             </Grid>
@@ -32,10 +33,12 @@ export default () => {
 }
 
 const MoviesTable = () => {
+    const moviesTableProps = useMoviesTable();
+
     return (
         <Grid item>
             <TableContainer>
-                <Table size="small" aria-label="a dense table">
+                <Table size="small">
                     <TableHead>
                         <TableRow>
                             <TableCell>id</TableCell>
@@ -45,7 +48,7 @@ const MoviesTable = () => {
                             <TableCell></TableCell>
                         </TableRow>
                     </TableHead>
-                    <MoviesTableBody movies={MOVIES} />
+                    <MoviesTableBody {...moviesTableProps} />
                 </Table>
             </TableContainer>
         </Grid>
@@ -62,29 +65,32 @@ const MoviesTableBody = ({ movies }: MoviesTableBodyProps) => (
     </TableBody>
 )
 
-const MovieTableRow = ({ movieId, name, publicationDate, state }: Movie) => (
-    <TableRow>
-        <TableCell component="th" scope="row">
-            {movieId}
-        </TableCell>
-        <TableCell>{name}</TableCell>
-        <TableCell>{publicationDate.toISOString()}</TableCell>
-        <TableCell>{state ? 'Activo' : 'Inactivo'}</TableCell>
-        <TableCell>
-            <Grid container direction="row" spacing={1}>
-                <IconButton color="primary">
-                    <CreateIcon />
-                </IconButton>
-                <IconButton color="inherit">
-                    <DehazeIcon />
-                </IconButton>
-                <IconButton color="default">
-                    {state ? <LockIcon /> : <LockOpenIcon />}
-                </IconButton>
-                <IconButton color="secondary">
-                    <DeleteIcon />
-                </IconButton>
-            </Grid>
-        </TableCell>
-    </TableRow>
-)
+const MovieTableRow = ({ movieId, name, publicationDate, state }: Movie) => {
+    const movieTableRowProp = useMovieTableRow();
+    return (
+        <TableRow>
+            <TableCell component="th" scope="row">
+                {movieId}
+            </TableCell>
+            <TableCell>{name}</TableCell>
+            <TableCell>{publicationDate.toISOString()}</TableCell>
+            <TableCell>{state ? 'Activo' : 'Inactivo'}</TableCell>
+            <TableCell>
+                <Grid container direction="row" spacing={1}>
+                    <IconButton color="primary">
+                        <CreateIcon />
+                    </IconButton>
+                    <IconButton color="inherit">
+                        <DehazeIcon />
+                    </IconButton>
+                    <IconButton color="default">
+                        {state ? <LockIcon /> : <LockOpenIcon />}
+                    </IconButton>
+                    <IconButton color="secondary" onClick={movieTableRowProp.handleOnDeleteMovie(movieId)}>
+                        <DeleteIcon />
+                    </IconButton>
+                </Grid>
+            </TableCell>
+        </TableRow>
+    )
+}
