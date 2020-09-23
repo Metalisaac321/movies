@@ -1,31 +1,78 @@
 import React, { Fragment } from 'react';
-import { Grid } from '@material-ui/core';
-import Sidebar from './Sidebar';
-import { AppBar, Button, IconButton, Toolbar, Typography } from '@material-ui/core';
+import { Grid, ListItem, ListItemText } from '@material-ui/core';
+import { AppBar, Button, IconButton, Toolbar } from '@material-ui/core';
 import MenuIcon from '@material-ui/icons/Menu';
-import { Route, Switch } from 'react-router-dom';
+import { Route, Switch, useHistory } from 'react-router-dom';
 import Movies from '../../domain/Movies';
 import Turns from '../../domain/Turns';
 import Admin from '../../domain/Admin';
 import Profile from '../../domain/Profile';
 import Dashboard from '../../domain/Dashboard';
-
+import { ContainerAppGrid, SidebarAndContainerAppContainer, StyledAppBar, StyledDivider, StyledList } from './style';
+import { MENU_ITEMS } from './constants';
+import { MenuItemProps } from './types';
 
 export default function App() {
   return (
-    <Fragment>
+    <Grid container direction="row">
       <Topbar />
-      <Grid container direction="row" spacing={4}>
+      <SidebarAndContainerAppContainer container item direction="row" spacing={4}>
         <Sidebar />
         <ContainerApp />
-      </Grid>
-    </Fragment>
+      </SidebarAndContainerAppContainer>
+    </Grid >
   );
+}
+
+const Topbar = () => {
+  return (
+    <Grid container item>
+      <StyledAppBar position="relative">
+        <Toolbar>
+          <IconButton edge="start" color="inherit" aria-label="menu">
+            <MenuIcon />
+          </IconButton>
+          <Button color="inherit">Login</Button>
+        </Toolbar>
+      </StyledAppBar>
+    </Grid>
+  )
+}
+
+const Sidebar = () => {
+  return (
+    <Grid item xs={12} sm={4}>
+      <StyledList>
+        {
+          MENU_ITEMS.map(({ menuItemId, ...menuItem }) => (
+            <MenuItem key={menuItemId} {...menuItem} />
+          ))
+        }
+      </StyledList>
+    </Grid>
+  )
+}
+
+const MenuItem = ({ text, route }: MenuItemProps) => {
+  let history = useHistory();
+
+  const handleClickListItem = () => {
+    history.push(route);
+  }
+
+  return (
+    <Fragment>
+      <ListItem button onClick={handleClickListItem}>
+        <ListItemText primary={text} />
+      </ListItem>
+      <StyledDivider />
+    </Fragment>
+  )
 }
 
 const ContainerApp = () => {
   return (
-    <Grid item xs={12} sm={8}>
+    <ContainerAppGrid item xs={12} sm={8}>
       <Switch>
         <Route path="/movies">
           <Movies />
@@ -43,22 +90,7 @@ const ContainerApp = () => {
           <Dashboard />
         </Route>
       </Switch>
-    </Grid>
+    </ContainerAppGrid>
   )
 };
 
-const Topbar = () => {
-  return (
-    <AppBar position="static">
-      <Toolbar>
-        <IconButton edge="start" color="inherit" aria-label="menu">
-          <MenuIcon />
-        </IconButton>
-        <Typography variant="h6">
-          News
-              </Typography>
-        <Button color="inherit">Login</Button>
-      </Toolbar>
-    </AppBar>
-  )
-}
