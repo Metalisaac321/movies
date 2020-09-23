@@ -1,6 +1,6 @@
 import React, { Fragment } from 'react';
 import { Grid, ListItem, ListItemText } from '@material-ui/core';
-import { AppBar, Button, IconButton, Toolbar } from '@material-ui/core';
+import { Button, IconButton, Toolbar } from '@material-ui/core';
 import MenuIcon from '@material-ui/icons/Menu';
 import { Route, Switch, useHistory } from 'react-router-dom';
 import Movies from '../../domain/Movies';

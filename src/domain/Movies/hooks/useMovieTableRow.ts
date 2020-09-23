@@ -1,9 +1,11 @@
 import { useDispatch } from "react-redux";
+import { useHistory } from "react-router-dom";
 import { changeMovieById, deleteMovie, setDialogProps } from '../actionCreators';
 import { Movie } from "../types";
 
 export default () => {
     const dispatch = useDispatch();
+    const history = useHistory();
 
     const handleOnDeleteMovie = (movieId: number) => () => {
         dispatch(deleteMovie(movieId))
@@ -26,9 +28,14 @@ export default () => {
         }))
     }
 
+    const handleAssingTurns = (movieId: number) => () => {
+        history.push(`turns/movie/${movieId}`)
+    }
+
     return {
         handleOnDeleteMovie,
         handleEditMovie,
-        handleChangeStatus
+        handleChangeStatus,
+        handleAssingTurns,
     }
 }

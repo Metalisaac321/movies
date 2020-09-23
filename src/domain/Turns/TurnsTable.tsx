@@ -6,39 +6,39 @@ import DehazeIcon from '@material-ui/icons/Dehaze'
 import LockIcon from '@material-ui/icons/Lock'
 import LockOpenIcon from '@material-ui/icons/LockOpen'
 import DeleteIcon from '@material-ui/icons/Delete'
-import { Movie, MoviesTableBodyProps } from './types';
-import useMoviesTable from './hooks/useMoviesTable';
-import useMovieTableRow from './hooks/useMovieTableRow';
-import useMovies from './hooks/useMovies';
-import MoviesDialog from './MoviesDialog';
-
+import useTurnsTable from './hooks/useTurnsTable';
+import useTurnTableRow from './hooks/useTurnTableRow';
+import useTurns from './hooks/useTurns';
+import { Turn, TurnsTableBodyProps } from './types';
 
 export default () => {
-    const { handleNewMovie } = useMovies();
+    const {
+        handleNewTurn,
+    } = useTurns();
+
     return (
         <Grid container direction="column" spacing={4} >
             <Grid container item direction="row" justify="space-between">
                 <Grid item>
                     <Typography variant="h3">
-                        Películas
+                        Turnos
                     </Typography>
                 </Grid>
                 <ButtonContainer item>
-                    <StyledButton variant="contained" color="primary" onClick={handleNewMovie}>
+                    <StyledButton variant="contained" color="primary" onClick={handleNewTurn}>
                         <Typography variant="body1">
-                            Nueva película
+                            Nuevo Turno
                         </Typography>
                     </StyledButton>
                 </ButtonContainer>
             </Grid>
-            <MoviesTable />
-            <MoviesDialog />
+            <TurnsTable />
         </Grid>
     )
 }
 
-const MoviesTable = () => {
-    const moviesTableProps = useMoviesTable();
+const TurnsTable = () => {
+    const turnsTableProps = useTurnsTable();
 
     return (
         <Grid item>
@@ -47,58 +47,64 @@ const MoviesTable = () => {
                     <TableHead>
                         <TableRow>
                             <TableCell>id</TableCell>
-                            <TableCell>Nombre</TableCell>
-                            <TableCell>F.Publicación</TableCell>
+                            <TableCell>Turno</TableCell>
                             <TableCell>Estado</TableCell>
+                            <TableCell>Movie</TableCell>
                             <TableCell></TableCell>
                         </TableRow>
                     </TableHead>
-                    <MoviesTableBody {...moviesTableProps} />
+                    <TurnsTableBody {...turnsTableProps} />
                 </Table>
             </TableContainer>
         </Grid>
     )
 }
 
-const MoviesTableBody = ({ movies }: MoviesTableBodyProps) => (
+const TurnsTableBody = ({ turns }: TurnsTableBodyProps) => (
     <TableBody>
         {
-            movies.map((movie) => (
-                <MovieTableRow key={movie.movieId} {...movie} />
+            turns.map((turn) => (
+                <TurnTableRow key={turn.turnId} {...turn} />
             ))
         }
     </TableBody>
 )
 
-const MovieTableRow = (movie: Movie) => {
-    const { movieId, name, publicationDate, state } = movie;
+const TurnTableRow = (turnObject: Turn) => {
     const {
-        handleEditMovie,
-        handleOnDeleteMovie,
+        turnId,
+        state,
+        turn,
+        movieId
+    } = turnObject;
+
+    const {
+        handleEditTurn,
+        handleOnDeleteTurn,
         handleChangeStatus,
         handleAssingTurns,
-    } = useMovieTableRow();
+    } = useTurnTableRow();
 
     return (
         <TableRow>
             <TableCell component="th" scope="row">
-                {movieId}
+                {turnId}
             </TableCell>
-            <TableCell>{name}</TableCell>
-            <TableCell>{publicationDate.toISOString()}</TableCell>
+            <TableCell>{turn}</TableCell>
             <TableCell>{state ? 'Activo' : 'Inactivo'}</TableCell>
+            <TableCell>{movieId}</TableCell>
             <TableCell>
                 <Grid container direction="row" spacing={1}>
-                    <IconButton color="primary" onClick={handleEditMovie(movie)}>
+                    <IconButton color="primary" onClick={handleEditTurn(turnObject)}>
                         <CreateIcon />
                     </IconButton>
-                    <IconButton color="inherit" onClick={handleAssingTurns(movieId)}>
+                    <IconButton color="inherit" onClick={handleAssingTurns(turnId)}>
                         <DehazeIcon />
                     </IconButton>
-                    <IconButton color="default" onClick={handleChangeStatus(movie, !state)}>
+                    <IconButton color="default" onClick={handleChangeStatus(turnObject, !state)}>
                         {state ? <LockIcon /> : <LockOpenIcon />}
                     </IconButton>
-                    <IconButton color="secondary" onClick={handleOnDeleteMovie(movieId)}>
+                    <IconButton color="secondary" onClick={handleOnDeleteTurn(turnId)}>
                         <DeleteIcon />
                     </IconButton>
                 </Grid>
