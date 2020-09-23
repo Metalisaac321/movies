@@ -1,14 +1,18 @@
 import React from 'react';
-import './App.css';
-import { Button } from '@material-ui/core';
+import { Grid } from '@material-ui/core';
+import Topbar from './Topbar';
+import Sidebar from './Sidebar';
+import ContainerApp from './ContainerApp';
 
 function App() {
   return (
-    <div className="App">
-      <Button variant="contained" color="primary">
-        Hello World
-      </Button>
-    </div>
+    <>
+      <Topbar />
+      <Grid container direction="row">
+        <Sidebar />
+        <ContainerApp />
+      </Grid>
+    </>
   );
 }
 
