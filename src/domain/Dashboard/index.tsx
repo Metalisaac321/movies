@@ -3,9 +3,10 @@ import React from 'react';
 
 export default () => {
     return (
-        <Grid item xs={12} sm={8}>
-            <p>ContainerApp</p>
+        <Grid container>
+            <h1>
+                This is Dashboard page
+            </h1>
         </Grid>
     )
-
 }
