@@ -18,7 +18,10 @@ export default () => {
         <Dialog onClose={handleClose} aria-labelledby="customized-dialog-title" open={isOpen}>
             <DialogTitle id="customized-dialog-title">
                 <Grid container direction="row" justify="space-between">
-                    <Grid>
+                    <Grid item style={{
+                        width: '500px',
+                        textAlign: 'center'
+                    }}>
                         <Typography variant="h4">
                             {isEditMovie ? 'Editar Película' : 'Nueva Película'}
                         </Typography>

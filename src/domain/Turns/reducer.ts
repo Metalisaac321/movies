@@ -1,7 +1,5 @@
 import { Turn, TurnsState } from "./types";
 import { AddNewTurnAction, ADD_NEW_TURN, ChangeTurnAction, CHANGE_TURN, DeleteTurnAction, DELETE_TURN, EditTurnAction, EDIT_TURN, SetStateTurnAction, SET_TURN_STATE, TurnsAction, TurnsFetchInitAction, TURNS_FETCH_INIT } from './actionTypes';
-import { TurnedIn } from "@material-ui/icons";
-import { moviesReducer } from "../Movies/reducer";
 
 export const turnInitialData: TurnsState = {
   turns: [],

@@ -1,12 +1,12 @@
-import { Grid } from '@material-ui/core';
+import { Grid, Typography } from '@material-ui/core';
 import React from 'react';
 
 export default () => {
     return (
         <Grid container>
-            <h1>
+            <Typography variant="h3">
                 This is Admin page
-            </h1>
+            </Typography>
         </Grid>
     )
 }

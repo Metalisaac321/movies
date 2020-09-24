@@ -1,9 +1,7 @@
-import { useCallback, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory, useParams } from "react-router-dom";
 import { RootState } from "../../../store";
-import { addNewTurn, changeTurnById, editTurnField, setInitTurns, setTurnState } from "../actionCreators";
-import { TURNS } from "../constants";
+import { addNewTurn, changeTurnById, editTurnField, setTurnState } from "../actionCreators";
 
 export default () => {
     const turn = useSelector((state: RootState) => state.turnsState.turn);

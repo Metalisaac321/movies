@@ -1,7 +1,6 @@
 import React, { Fragment } from 'react';
-import { Grid, ListItem, ListItemText } from '@material-ui/core';
-import { Button, IconButton, Toolbar } from '@material-ui/core';
-import MenuIcon from '@material-ui/icons/Menu';
+import { Avatar, Grid, ListItem, ListItemText, Typography } from '@material-ui/core';
+import { Button, Toolbar } from '@material-ui/core';
 import { Route, Switch, useHistory } from 'react-router-dom';
 import Movies from '../../domain/Movies';
 import Turns from '../../domain/Turns';
@@ -29,10 +28,36 @@ const Topbar = () => {
     <Grid container item>
       <StyledAppBar position="relative">
         <Toolbar>
-          <IconButton edge="start" color="inherit" aria-label="menu">
-            <MenuIcon />
-          </IconButton>
-          <Button color="inherit">Login</Button>
+          <Grid item container direction="row" justify="space-between">
+            <Grid item container direction="row" xs={8}>
+              <Grid item>
+                <Avatar variant="square" style={{
+                  'height': '50px',
+                  'width': '51px',
+                }}>
+                  Logo
+                </Avatar>
+              </Grid>
+              <Grid item style={{ alignSelf: 'center' }}>
+                <Button color="inherit">Evaluación Osp</Button>
+              </Grid>
+            </Grid>
+            <Grid item direction="row" container style={{
+              width: '150px',
+            }}>
+              <Grid item style={{ alignSelf: 'center' }}>
+                <Avatar
+                  variant="square"
+                  src="https://media-exp1.licdn.com/dms/image/C4E03AQGVmjcqYSexJg/profile-displayphoto-shrink_400_400/0?e=1606348800&v=beta&t=pbviNFYhROsrmOFtJaICAgPm0ImlBEUpc2JxfMSNnOA"
+                />
+              </Grid>
+              <Grid item style={{ alignSelf: 'center' }}>
+                <Typography variant="body1">
+                  Admin
+                </Typography>
+              </Grid>
+            </Grid>
+          </Grid>
         </Toolbar>
       </StyledAppBar>
     </Grid>

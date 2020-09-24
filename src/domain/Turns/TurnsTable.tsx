@@ -2,7 +2,6 @@ import { Grid, Table, TableContainer, Typography, TableHead, TableRow, TableCell
 import React from 'react';
 import { ButtonContainer, StyledButton } from './style';
 import CreateIcon from '@material-ui/icons/Create'
-import DehazeIcon from '@material-ui/icons/Dehaze'
 import LockIcon from '@material-ui/icons/Lock'
 import LockOpenIcon from '@material-ui/icons/LockOpen'
 import DeleteIcon from '@material-ui/icons/Delete'

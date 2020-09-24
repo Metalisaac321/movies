@@ -1,5 +1,5 @@
 import { useDispatch } from "react-redux";
-import { useHistory, useRouteMatch } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import { changeTurnById, deleteTurn, setTurnState } from "../actionCreators";
 import { Turn } from "../types";
 
